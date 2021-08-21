@@ -1,27 +1,31 @@
-class ShoppingCar {
-    constructor([itemId, itemName, price, quantity, cupon]) {
-        this.itemId = itemId;
-        this.itemName = itemName;
-        this.price = price;
-        this.quantity = quantity;
-        this.cupon = cupon || false;
+class ShoppingCart {
+    constructor(nombre) {
+        this.nombre = nombre;
+        this.articles = [];
+        this.total = 0;
+        this.pagado = false;
     }
-    informer(mensaje) {
-        console.log(mensaje);
+    addArticle(article) {
+        this.articles.push(article);
     }
-    addCar() {
-        const newItem = [];
-        this.informer(`Array vacio -----> ${newItem}`);
-        // let newItem = [this.itemId, this.itemName, this.price, this.quantity];
-        newItem.push([this.itemId, this.itemName, this.price, this.quantity]);
-        this.informer(`Array con el articulo nuevo -----> ${newItem}`);
-        this.informer(`Se ha agregado el articulo ${newItem} al carrito`);
+    getTotal() {
+        var total = 0;
+        for (let i = 0; i < this.articles.length; i++) {
+            const articlesInCart = this.articles[1];
+            var total = total + articlesInCart[1]
+        }
+        this.total = total;
     }
-    deleteCar() {}
-    payment() {}
+
 }
-const carrito = new ShoppingCar([01, "IPAD", 13999.99, 1]);
-carrito.addCar();
-const carrito2 = new ShoppingCar([02, "Audifonos", 599.99, 2]);
-carrito2.addCar();
-console.log(carrito);
+const carrito = new ShoppingCart('Carrito');
+let camisa = ["Camisa", 350.00]
+carrito.addArticle(camisa)
+carrito.addArticle(camisa)
+carrito.getTotal();
+carrito.addArticle(camisa)
+carrito.addArticle(camisa)
+
+
+json = document.getElementById("json");
+json.innerHTML = "Carrito: " + JSON.stringify(carrito, undefined, 2)
